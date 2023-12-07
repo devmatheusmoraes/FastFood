@@ -33,9 +33,9 @@ public class BebidaController {
 
     @GetMapping("/{id}")
     public Bebida getById(@PathVariable int id){
+        logger.info("Método getById iniciado");
         Bebida bebida = bebidaService.getById(id);
         return bebida;
-
     }
 
     @PutMapping("/{id}")
