@@ -23,8 +23,12 @@ public class Pedido {
 
     private Solicitante solicitante;
 
+    private int codigo;
+
     public Pedido(Produto produto, Solicitante solicitante){
-        listaDeProduto = new ArrayList<>();
+        if (listaDeProduto == null){
+            listaDeProduto = new ArrayList<>();
+        }
         listaDeProduto.add(produto);
         this.solicitante = solicitante;
     }

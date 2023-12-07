@@ -25,7 +25,6 @@ public class Comida extends Produto{
 
     @Override
     public void preparar(){
-
         System.out.println("Preparando a comida.");
     }
 }
