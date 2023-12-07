@@ -4,9 +4,10 @@ import lombok.*;
 
 @Getter
 @Setter
+@Builder
+@ToString
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
 public class Bebida extends Produto{
 
     private boolean gelada;
@@ -16,6 +17,7 @@ public class Bebida extends Produto{
     private String marca;
 
     public Bebida(String nome, float valor, int codigo, boolean gelada, float tamanho, String marca){
+        super();
         this.setNome(nome);
         this.setValor(valor);
         this.setCodigo(codigo);
@@ -28,18 +30,5 @@ public class Bebida extends Produto{
     public void preparar(){
         System.out.println("Preparando a bebida.");
     }
-
-    @Override
-    public String toString() {
-        return "Bebida{" +
-                "  codigo=" +Integer.toString(getCodigo()) +
-                ", valor=" + Float.toString(getValor()) +
-                ", nome=" + getNome() +
-                ", gelada=" + Boolean.toString(this.gelada) +
-                ", tamanho=" + Float.toString(this.tamanho) +
-                ", marca='" + this.marca + '\'' +
-                '}';
-    }
-
 
 }
