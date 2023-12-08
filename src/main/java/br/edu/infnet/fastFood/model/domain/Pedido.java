@@ -44,13 +44,6 @@ public class Pedido {
         this.solicitante = solicitante;
         this.listaDeProduto = new ArrayList<>();
         listaDeProduto.add(produto);
-
-        /*if (listaDeProduto == null){
-            listaDeProduto = new ArrayList<>();
-        }*/
-
-        /*listaDeProduto.add(produto);
-        this.solicitante = solicitante;*/
     }
 
     public void setData(LocalDateTime data) throws PedidoException {
