@@ -1,4 +1,5 @@
 package br.edu.infnet.fastFood.model.domain;
+import br.edu.infnet.fastFood.exceptions.SobremesaException;
 import lombok.*;
 
 @Getter
@@ -22,6 +23,12 @@ public class Sobremesa extends Produto{
             this.doce = doce;
             this.informacao = informacao;
         }
+    public void algumaOperacao() {
+        // Alguma lógica aqui
+
+        // Se algo der errado, lançar a exceção
+        throw new SobremesaException("Mensagem explicativa sobre o erro específico na Sobremesa");
+    }
 
         @Override
         public void preparar(){

@@ -1,5 +1,6 @@
 package br.edu.infnet.fastFood.model.domain;
 
+import br.edu.infnet.fastFood.exceptions.PedidoException;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -33,6 +34,12 @@ public class Pedido {
         this.solicitante = solicitante;
     }
 
+    public void algumaOperacao() {
+        // Alguma lógica aqui
+
+        // Se algo der errado, lançar a exceção
+        throw new PedidoException("Mensagem explicativa sobre o erro específico no Pedido");
+    }
     public void adicionarProduto (Produto produto){
         listaDeProduto.add(produto);
     }

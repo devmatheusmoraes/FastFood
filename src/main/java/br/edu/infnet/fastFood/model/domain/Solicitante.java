@@ -2,6 +2,7 @@ package br.edu.infnet.fastFood.model.domain;
 
 
 
+import br.edu.infnet.fastFood.exceptions.SolicitanteException;
 import lombok.*;
 
 import java.util.ArrayList;
@@ -43,6 +44,12 @@ public class Solicitante {
         }
     }
 
+    public void algumaOperacao() {
+        // Alguma lógica aqui
+
+        // Se algo der errado, lançar a exceção
+        throw new SolicitanteException("Mensagem explicativa sobre o erro específico no Solicitante");
+    }
     public void adicionarPedido(Pedido pedido) {
         if (listaDePedido == null) {
             listaDePedido = new ArrayList<>();

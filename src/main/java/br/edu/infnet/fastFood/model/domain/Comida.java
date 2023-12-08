@@ -1,5 +1,6 @@
 package br.edu.infnet.fastFood.model.domain;
 
+import br.edu.infnet.fastFood.exceptions.ComidaException;
 import lombok.*;
 
 @Getter
@@ -23,6 +24,12 @@ public class Comida extends Produto{
         this.vegano = vegano;
     }
 
+    public void algumaOperacao() {
+        // Alguma lógica aqui
+
+        // Se algo der errado, lançar a exceção
+        throw new ComidaException("Mensagem explicativa sobre o erro específico na classe Comida");
+    }
     @Override
     public void preparar(){
         System.out.println("Preparando a comida.");
