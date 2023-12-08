@@ -26,10 +26,17 @@ public class Pedido {
 
     private int codigo;
 
+    public Pedido(String descricao, LocalDateTime data, boolean web, int codigo) {
+        this.descricao = descricao;
+        this.data = data;
+        this.web = web;
+        this.codigo = codigo;
+    }
+
     public Pedido(String descricao, LocalDateTime data, boolean web, List<Produto> listaDeProduto, Solicitante solicitante, int codigo) {
         this.descricao = descricao;
         this.web = web;
-        this.listaDeProduto = listaDeProduto;
+        this.listaDeProduto = listaDeProduto != null ? listaDeProduto : new ArrayList<>();
         this.solicitante = solicitante;
         this.codigo = codigo;
 
@@ -40,10 +47,21 @@ public class Pedido {
         }
     }
 
-    public Pedido(Produto produto, Solicitante solicitante){
-        this.solicitante = solicitante;
+    public Pedido(String descricao, LocalDateTime data, boolean web, Produto produto, Solicitante solicitante) {
+        this.descricao = descricao;
+        this.web = web;
+
+        try {
+            setData(data);
+        } catch (PedidoException e) {
+            System.out.println("Erro ao configurar a data do pedido: " + e.getMessage());
+        }
+
         this.listaDeProduto = new ArrayList<>();
-        listaDeProduto.add(produto);
+        if (produto != null) {
+            listaDeProduto.add(produto);
+        }
+        this.solicitante = solicitante;
     }
 
     public void setData(LocalDateTime data) throws PedidoException {
@@ -54,7 +72,10 @@ public class Pedido {
         }
         this.data = data;
     }
-    public void adicionarProduto (Produto produto){
+    public void adicionarProduto(Produto produto) {
+        if (listaDeProduto == null) {
+            listaDeProduto = new ArrayList<>();
+        }
         listaDeProduto.add(produto);
     }
 

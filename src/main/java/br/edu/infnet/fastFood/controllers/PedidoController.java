@@ -1,9 +1,7 @@
 package br.edu.infnet.fastFood.controllers;
 
 import br.edu.infnet.fastFood.model.domain.Pedido;
-import br.edu.infnet.fastFood.model.domain.Solicitante;
 import br.edu.infnet.fastFood.services.PedidoService;
-import br.edu.infnet.fastFood.services.SolicitanteService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,7 +49,7 @@ public class PedidoController {
     }
 
     @PostMapping
-    public void create(@RequestBody Pedido pedido){
+    public void create(@RequestBody Pedido pedido) {
         logger.info("Método create iniciado: " + pedido);
         this.pedidoService.create(pedido);
     }
