@@ -1,5 +1,6 @@
 package br.edu.infnet.fastFood.model.domain;
 
+import br.edu.infnet.fastFood.exceptions.BebidaException;
 import br.edu.infnet.fastFood.exceptions.ComidaException;
 import lombok.*;
 
@@ -22,13 +23,19 @@ public class Comida extends Produto{
         this.ingredientes = ingredientes;
         this.peso = peso;
         this.vegano = vegano;
+
+        try {
+            setPeso(peso);
+        } catch (ComidaException e) {
+            System.out.println("Erro ao configurar o peso da comida: " + e.getMessage());
+        }
     }
 
-    public void algumaOperacao() {
-        // Alguma lógica aqui
-
-        // Se algo der errado, lançar a exceção
-        throw new ComidaException("Mensagem explicativa sobre o erro específico na classe Comida");
+    public void setPeso(float peso) throws ComidaException {
+        if (peso <= 0) {
+            throw new ComidaException("O peso da comida deve ser maior que zero.");
+        }
+        this.peso = peso;
     }
     @Override
     public void preparar(){

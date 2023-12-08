@@ -31,9 +31,6 @@ public class Bebida extends Produto{
             System.out.println("Erro ao configurar o tamanho da bebida: " + e.getMessage());
         }
 
-        this.gelada = gelada;
-        this.tamanho = tamanho;
-        this.marca = marca;
     }
 
     @Override

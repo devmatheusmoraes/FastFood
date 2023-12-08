@@ -1,4 +1,7 @@
 package br.edu.infnet.fastFood.model.domain;
+import br.edu.infnet.fastFood.exceptions.BebidaException;
+import br.edu.infnet.fastFood.exceptions.ComidaException;
+import br.edu.infnet.fastFood.exceptions.ProdutoException;
 import br.edu.infnet.fastFood.exceptions.SobremesaException;
 import lombok.*;
 
@@ -19,15 +22,20 @@ public class Sobremesa extends Produto{
             this.setNome(nome);
             this.setValor(valor);
             this.setCodigo(codigo);
-            this.quantidade = quantidade;
             this.doce = doce;
             this.informacao = informacao;
-        }
-    public void algumaOperacao() {
-        // Alguma lógica aqui
 
-        // Se algo der errado, lançar a exceção
-        throw new SobremesaException("Mensagem explicativa sobre o erro específico na Sobremesa");
+            try {
+                setQuantidade(quantidade);
+            } catch (SobremesaException e) {
+                System.out.println("Erro ao configurar a quantidade da sobremesa: " + e.getMessage());
+            }
+        }
+    public void setQuantidade(float quantidade) throws SobremesaException {
+        if (quantidade <= 0) {
+            throw new SobremesaException("A quantidade da sobremesa deve ser maior que zero.");
+        }
+        this.quantidade = quantidade;
     }
 
         @Override

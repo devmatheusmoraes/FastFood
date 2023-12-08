@@ -14,7 +14,7 @@ public class SobremesaService {
     private static int idMapa = 1;
 
     private Map<Integer, Sobremesa> initSobremesa(){
-        Sobremesa sobremesa = new Sobremesa("",0,0,0,false,"");
+        Sobremesa sobremesa = new Sobremesa("",1,0,0,false,"");
         Map<Integer, Sobremesa> sobremesas = new HashMap<>();
         int id = idMapa++;
         sobremesas.put(id,sobremesa);

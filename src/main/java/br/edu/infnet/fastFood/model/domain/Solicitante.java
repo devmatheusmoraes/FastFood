@@ -2,11 +2,13 @@ package br.edu.infnet.fastFood.model.domain;
 
 
 
+import br.edu.infnet.fastFood.exceptions.ProdutoException;
 import br.edu.infnet.fastFood.exceptions.SolicitanteException;
 import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
 
 @Getter
 @Setter
@@ -34,7 +36,12 @@ public class Solicitante {
     public Solicitante(String nome, String cpf, String email, Pedido pedido) {
         this.nome = nome;
         this.cpf = cpf;
-        this.email = email;
+
+        try {
+            setEmail(email);
+        }catch (SolicitanteException e) {
+            System.out.println("Erro ao configurar o e-mail do solicitante: " + e.getMessage());
+        }
 
         if (listaDePedido == null) {
             this.listaDePedido = new ArrayList<>();
@@ -44,11 +51,15 @@ public class Solicitante {
         }
     }
 
-    public void algumaOperacao() {
-        // Alguma lógica aqui
+    public void setEmail(String email) throws SolicitanteException{
+        Predicate<String> isValidEmail = emailAddress ->
+                emailAddress.matches("[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}");
 
-        // Se algo der errado, lançar a exceção
-        throw new SolicitanteException("Mensagem explicativa sobre o erro específico no Solicitante");
+        if (isValidEmail.test(email)) {
+            this.email = email;
+        } else {
+            throw new SolicitanteException("O e-mail do solicitante é inválido.");
+        }
     }
     public void adicionarPedido(Pedido pedido) {
         if (listaDePedido == null) {

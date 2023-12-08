@@ -16,7 +16,7 @@ public class BebidaService {
     private static int idMapa = 1;
 
     private Map<Integer, Bebida> initBebida(){
-        Bebida bebida = new Bebida("",0,0,false,0,"");
+        Bebida bebida = new Bebida("",1,0,false,0,"");
         Map<Integer, Bebida> bebidas = new HashMap<>();
         int id = idMapa++;
         bebidas.put(id,bebida);

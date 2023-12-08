@@ -14,7 +14,7 @@ public class ComidaService {
     private static int idMapa = 1;
 
     private Map<Integer, Comida> initComida(){
-        Comida comida = new Comida("",0,0,0,false,"");
+        Comida comida = new Comida("",1,0,0,false,"");
         Map<Integer, Comida> comidas = new HashMap<>();
         int id = idMapa++;
         comidas.put(id,comida);
