@@ -6,7 +6,7 @@ O projeto FastFood é um sistema de controle de pedidos desenvolvido com Spring 
 
 Certifique-se de ter as seguintes ferramentas instaladas antes de executar o projeto:
 
-- Java JDK 8 ou superior
+- Java JDK 17
 - Maven
 - Git
 
