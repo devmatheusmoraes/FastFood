@@ -9,7 +9,7 @@ import java.util.Map;
 
 
 @Service
-public class BebidaService {
+public class BebidaService implements CrudInterface<Bebida> {
 
     Map<Integer, Bebida> bebidas = initBebida();
     private static int idBebida = 1;
@@ -22,26 +22,30 @@ public class BebidaService {
         bebidas.put(id,bebida);
         return bebidas;
     }
-
+    @Override
     public List<Bebida> getAll(){
         return this.bebidas.values().stream().toList();
     }
-    
+
+    @Override
     public void delete(int id){
         bebidas.remove(id);
     }
 
+    @Override
     public void create(Bebida bebida){
         int id = idBebida++;
         bebida.setCodigo(id);
         bebidas.put(id,bebida);
     }
 
+    @Override
     public void update(int id, Bebida novaBebida){
         novaBebida.setCodigo(id);
         bebidas.replace(id, novaBebida);
     }
 
+    @Override
     public Bebida getById(int id){
         return this.bebidas.get(id);
     }
