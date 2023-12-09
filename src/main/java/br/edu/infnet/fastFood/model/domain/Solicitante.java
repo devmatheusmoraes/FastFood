@@ -7,7 +7,9 @@ import br.edu.infnet.fastFood.exceptions.SolicitanteException;
 import lombok.*;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.function.Predicate;
 
 @Getter
@@ -26,16 +28,24 @@ public class Solicitante {
 
     private List<Pedido> listaDePedido;
 
+    private Set<String> telefones;
+
+    private String[] enderecos;
+
     public Solicitante(String nome, String cpf, String email){
         super();
         this.nome = nome;
         this.cpf = cpf;
         this.email = email;
+        this.telefones = new HashSet<>();
+        this.enderecos = new String[3];
     }
 
     public Solicitante(String nome, String cpf, String email, Pedido pedido) {
         this.nome = nome;
         this.cpf = cpf;
+        this.telefones = new HashSet<>();
+        this.enderecos = new String[3];
 
         try {
             setEmail(email);
@@ -66,5 +76,17 @@ public class Solicitante {
             listaDePedido = new ArrayList<>();
         }
         listaDePedido.add(pedido);
+    }
+
+    public void adicionarEndereco(String endereco, int posicao) {
+        if (posicao >= 0 && posicao < enderecos.length) {
+            this.enderecos[posicao] = endereco;
+        } else {
+            System.out.println("Posição inválida para adicionar endereço.");
+        }
+    }
+
+    public void adicionarTelefone(String telefone) {
+        this.telefones.add(telefone);
     }
 }
