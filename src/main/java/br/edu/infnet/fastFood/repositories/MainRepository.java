@@ -1,11 +1,7 @@
 package br.edu.infnet.fastFood.repositories;
 
 import java.io.IOException;
-import java.nio.file.FileAlreadyExistsException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
+import java.nio.file.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -13,46 +9,41 @@ public class MainRepository {
 
     public static void main(String[] args) {
         try {
-
             String directoryName = "temp";
-            String fileName = "arquivo.txt";
+            String fileName = "arquivo_" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss")) + ".txt";
 
+            Runnable criarDiretorioEArquivo = () -> {
+                try {
 
-            Path directoryPath = Paths.get(directoryName);
-            if (Files.notExists(directoryPath)) {
-                Files.createDirectory(directoryPath);
-                System.out.println("Diretório criado: " + directoryPath.toAbsolutePath());
-            }
+                    Path directoryPath = Paths.get(directoryName);
+                    if (Files.notExists(directoryPath)) {
+                        Files.createDirectory(directoryPath);
+                        System.out.println("Diretório criado: " + directoryPath.toAbsolutePath());
+                    }
 
+                    Path filePath = directoryPath.resolve(fileName);
 
-            Path filePath = directoryPath.resolve(fileName);
+                    Files.createFile(filePath);
+                    System.out.println("Arquivo criado: " + filePath.toAbsolutePath());
 
-            Files.deleteIfExists(filePath);
+                    long fileSize = Files.size(filePath);
+                    String fileType = Files.probeContentType(filePath);
 
+                    String content = "Nome do Arquivo: " + fileName + "\n";
+                    content += "Data de criação: " + LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME) + "\n";
+                    content += "Tamanho do arquivo: " + fileSize + " bytes\n";
+                    content += "Tipo do arquivo: " + fileType + "\n";
 
-            if (Files.notExists(filePath)) {
-                Files.createFile(filePath);
-                System.out.println("Arquivo criado: " + filePath.toAbsolutePath());
+                    Files.writeString(filePath, content, StandardOpenOption.WRITE);
+                    System.out.println("Informações inseridas no arquivo.");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            };
 
+            criarDiretorioEArquivo.run();
 
-                long fileSize = Files.size(filePath);
-                String fileType = Files.probeContentType(filePath);
-
-
-                String content = "Nome do Arquivo: LogProjeto \n";
-                content += "Data de criação: " + LocalDateTime.now().format(DateTimeFormatter.ISO_LOCAL_DATE_TIME) + "\n";
-                content += "Tamanho do arquivo: " + fileSize + " bytes\n";
-                content += "Tipo do arquivo: " + fileType + "\n";
-
-
-                Files.writeString(filePath, content, StandardOpenOption.WRITE);
-                System.out.println("Informações inseridas no arquivo.");
-
-            }
-
-
-            String fileContent = Files.readString(filePath);
-
+            String fileContent = Files.readString(Paths.get(directoryName, fileName));
 
             System.out.println("\nConteúdo do arquivo:");
             System.out.println("Data de criação: " + buscaInfoPorChave(fileContent, "Data de criação"));
@@ -82,5 +73,4 @@ public class MainRepository {
 
         return content.substring(startIndex, endIndex).trim();
     }
-
 }
